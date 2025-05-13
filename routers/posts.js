@@ -1,10 +1,14 @@
 const express = require("express");
 const router = express.Router();
+const { posts } = require("../db");
 
 //# INDEX
 
 router.get("/", (req, res) => {
-  res.json({ message: "lista dei post" });
+  res.json({
+    message: "lista dei post",
+    data: { posts },
+  });
 });
 
 //# SHOW
