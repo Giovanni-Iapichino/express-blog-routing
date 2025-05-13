@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { posts } = require("../db");
+let { posts } = require("../db");
 
 //# INDEX
 
@@ -14,7 +14,12 @@ router.get("/", (req, res) => {
 //# SHOW
 
 router.get("/:id", (req, res) => {
-  res.json({ message: "dettagli del post" });
+  const id = parseInt(req.params.id);
+  const post = posts.find((currentPost) => currentPost.id === id);
+  res.json({
+    message: "dettagli del post" + id,
+    data: post,
+  });
 });
 
 //# CREATE
@@ -36,7 +41,12 @@ router.patch("/:id", (req, res) => {
 //# DELETE
 
 router.delete("/:id", (req, res) => {
-  res.json({ message: "eliminazione del post" });
+  const id = parseInt(req.params.id);
+  const post = posts.filter((post) => id !== post.id);
+  res.json({
+    message: "eliminazione del post",
+    data: post,
+  });
 });
 
 module.exports = router;
