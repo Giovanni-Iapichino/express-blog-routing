@@ -7,10 +7,6 @@ const { posts } = require("./db");
 
 app.use(express.static("public"));
 
-app.get("/bacheca", (req, res) => {
-  res.json({ posts });
-});
-
 app.use("/posts", postsRouter);
 
 app.listen(port, () => {
